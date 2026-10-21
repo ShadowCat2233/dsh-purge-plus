@@ -1,3 +1,27 @@
+# 1.4.3
+
+## 中文
+
+- 版本 **1.4.3**，`dshTarget` 仍是 **0.2.1-rc.2**。修掉桌面端点「应用」可能把应用留在死状态（弹「dsh desktop host stopped」崩溃框）。
+- 根因：`ASAR_SWAP_PS1` 的收尾逻辑是「asar 挪成功才重启」。asar 被占用挪不动时只写一个 `.rename-pending` 锁，而 Electron 已经被杀掉——应用躺着不启动，用户对着崩溃框；脚本自身中途死掉时更糟，锁都没留下，idle renamer 也不会接手。
+- 修复在 `lib/desktop.js`，三处，不动任何补丁规则：
+  - **看门狗**：杀进程前先派生隐藏进程，30 秒后检测不到应用就 `Start-Process` 拉起来，脚本是死是活应用都不会躺尸；
+  - **无条件重启**：asar 挪不动也照样启动应用（补丁在 plain 树已生效，swap 只是封印动作），`.rename-pending` 锁仍写入，留给 idle renamer 稍后接着封；
+  - **idle 兜底**：30 分钟超时出口补一层保护，退出前应用没在跑就拉回来。
+- 验证：两个生成的脚本通过 PowerShell 解析器语法校验；修复后重启加载正常，无新崩溃日志；看门狗进程名匹配已在生产环境命中。
+- 本仓库为 fork（JeffKeeping/dsh-purge-plus 之上），相对上游 YuJunZhiXue/dsh-purge 另含 1.3.0–1.4.2 的全部改动，逐条见 CHANGELOG.md。
+
+## English
+
+- **1.4.3**, `dshTarget` stays **0.2.1-rc.2**. Fixes desktop **Apply** possibly leaving the app dead ("dsh desktop host stopped" crash dialog).
+- Root cause: `ASAR_SWAP_PS1` only relaunched the app when the asar rename succeeded. When the file was locked, it wrote a `.rename-pending` lock and exited — but Electron was already killed, so the app never came back. If the script itself died mid-way, not even the lock was left and the idle renamer never took over.
+- Three fixes in `lib/desktop.js`, no patch rules touched:
+  - **Watchdog**: before killing the process, spawn a hidden helper that relaunches the app after 30s if it is gone — alive or dead, the script cannot leave the app down;
+  - **Unconditional relaunch**: start the app even if the rename failed (patches already took effect in the plain tree; the swap is only the sealing step); the `.rename-pending` lock is still written for the idle renamer;
+  - **Idle fallback**: the 30-minute timeout path now also relaunches the app if it is not running.
+- Verified: both generated scripts pass the PowerShell parser check; relaunch after the fix loads cleanly with no new crash logs; the watchdog process-name match was confirmed in production.
+- This repository is a fork on top of JeffKeeping/dsh-purge-plus; everything from 1.3.0–1.4.2 relative to upstream YuJunZhiXue/dsh-purge is included — see CHANGELOG.md.
+
 # 1.3.1
 
 ## 中文
