@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
 
 permissions:
   contents: write
@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   release:
-    if: github.repository == 'YuJunZhiXue/dsh-purge'
+    if: github.repository == 'ShadowCat2233/dsh-purge-plus'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -59,4 +59,4 @@ jobs:
           fi
           test -s "$zip"
           gh release upload "$tag" "$zip" --clobber
-          echo "published https://github.com/YuJunZhiXue/dsh-purge/releases/tag/${tag}"
+          echo "published https://github.com/ShadowCat2233/dsh-purge-plus/releases/tag/${tag}"

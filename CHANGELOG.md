@@ -7,6 +7,37 @@ Baseline: **1.2.0**. Everything below is what this fork adds, improves, or fixes
 
 ---
 
+## 1.4.3 — 修复桌面端「应用」可能把应用留在死状态
+
+### 问题
+
+桌面端点「应用」时，`ASAR_SWAP_PS1` 的收尾是「asar 挪成功才重启」：
+
+| 现场 | 结果 |
+| --- | --- |
+| 挪 asar 成功 | 重启，正常 |
+| 挪 asar 失败（文件被占用等） | **不重启**，只写一个 `.rename-pending` 锁——应用已经被杀了，躺着不启动，用户对着崩溃框 |
+| 脚本自身中途死掉（杀进程环节误伤等） | 同上，且锁都没留下，idle renamer 也不会接手 |
+
+实测复现：2026-10-22，脚本杀完 Electron 后未能挪走 `app.asar` 就退出，重启未执行，宿主进程退出码为 0、无 stderr，Electron main 直接弹「host stopped」。
+
+### 修复（`lib/desktop.js`，三处）
+
+| # | 位置 | 改动 |
+| --- | --- | --- |
+| 1 | `ASAR_SWAP_PS1` 杀进程前 | 新增**看门狗**：先派一个隐藏 PowerShell，30 秒后检测不到应用进程就 `Start-Process` 拉起来。脚本是死是活，应用都不会躺尸 |
+| 2 | `ASAR_SWAP_PS1` 结尾 | 改为**无条件重启**：asar 挪不动也照样启动应用（补丁在 plain 树已生效，swap 只是封印动作）；`.rename-pending` 锁仍写入，留给 idle renamer 稍后接着封 |
+| 3 | `ASAR_RENAME_WHEN_IDLE_PS1` 30 分钟超时出口 | 补一层保护：退出前应用没在跑就拉回来 |
+
+### 兼容性与验证
+
+- 只改桌面端重启脚本模板，**不动任何补丁规则**，`dshTarget: 0.2.1-rc.2` 不变
+- 生成的两个脚本通过 PowerShell 解析器（`[Parser]::ParseFile`）语法校验
+- 修复后重启加载验证：插件 boot 正常、无新崩溃日志
+- 看门狗的进程名匹配（`Get-Process -Name 'DeepSeek Harness'`）已在生产环境验证命中
+
+---
+
 ## 1.4.2 — 移除输入框里的「回退」按钮及其全部作用
 
 ### 移除内容

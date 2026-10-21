@@ -1,6 +1,6 @@
 {
   "name": "dsh-purge",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "DeepSeek Harness 破甲：让所有模型都能破甲，不同模型可换不同提示词；默认提示词面向国模「小码酱」。Jailbreak for every model — swap prompts per model. 求 Star 收藏 ⭐ 如要二开，请查看署名要求部分",
   "type": "module",
   "main": "lib/index.js",
@@ -64,11 +64,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YuJunZhiXue/dsh-purge.git"
+    "url": "git+https://github.com/ShadowCat2233/dsh-purge-plus.git"
   },
-  "homepage": "https://github.com/YuJunZhiXue/dsh-purge#readme",
+  "homepage": "https://github.com/ShadowCat2233/dsh-purge-plus#readme",
   "bugs": {
-    "url": "https://github.com/YuJunZhiXue/dsh-purge/issues"
+    "url": "https://github.com/ShadowCat2233/dsh-purge-plus/issues"
   },
   "dsh": {
     "bundle": {
@@ -86,11 +86,11 @@
     },
     "install": {
       "preferred": "tarball",
-      "tarball": "https://github.com/YuJunZhiXue/dsh-purge/archive/refs/heads/master.tar.gz",
-      "zip": "https://github.com/YuJunZhiXue/dsh-purge/archive/refs/heads/master.zip",
-      "git": "https://github.com/YuJunZhiXue/dsh-purge.git"
+      "tarball": "https://github.com/ShadowCat2233/dsh-purge-plus/archive/refs/heads/main.tar.gz",
+      "zip": "https://github.com/ShadowCat2233/dsh-purge-plus/archive/refs/heads/main.zip",
+      "git": "https://github.com/ShadowCat2233/dsh-purge-plus.git"
     },
-    "version": "1.4.2"
+    "version": "1.4.3"
   },
   "publishConfig": {
     "access": "public"
