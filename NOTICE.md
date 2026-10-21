@@ -10,7 +10,7 @@ This repository is a **fork** of **[YuJunZhiXue/dsh-purge](https://github.com/Yu
 | 原作者 | **小杨**（GitHub: [@YuJunZhiXue](https://github.com/YuJunZhiXue)） |
 | 上游仓库 | https://github.com/YuJunZhiXue/dsh-purge |
 | 上游许可证 | MIT，`Copyright (c) 2026 小杨`（见 [LICENSE](LICENSE)，本分支原样保留） |
-| 本分支 | 由 **JeffKeeping** 维护，仅做版本适配与体验优化 |
+| 本分支 | 当前维护者 **ShadowCat2233**；基于 **JeffKeeping/dsh-purge-plus** 的 1.4.2（`02725dd`）继续修改 |
 | 本分支版本 | 1.3.1，`dshTarget: 0.2.1-rc.2` |
 
 上游 README 要求：**借用本项目的名称、思路、代码或提示词，必须署名并写明来源仓库**。本仓库保留原作者署名、上游链接与原始 MIT 许可证文本；这是使用条件，不是可选项。
@@ -81,3 +81,9 @@ The plaintext prompt source (`lib/default-prompt-inject.md`) is intentionally no
 The upstream project forbids commercial sale, paid resale, and any profit from gray- or black-market use. This fork carries the same term unchanged.
 
 如要基于本分支二次开发，请同时保留：原作者署名、上游仓库链接、MIT 许可证全文、以及这条非商用声明。
+
+## 红队演练台组件 / Red-team console
+
+本分支保留源自 [Jueze-2019/dsh-redteam-mode](https://github.com/Jueze-2019/dsh-redteam-mode) 的演练台、预设、技能和相关工具。版权为 Copyright (c) 2026 Jueze-2019，MIT 许可证全文见 [docs/redteam-upstream-LICENSE](docs/redteam-upstream-LICENSE)，用途披露见 [docs/redteam-upstream-DISCLOSURE](docs/redteam-upstream-DISCLOSURE)。此组件随 JeffKeeping 分支引入，本次恢复先前清理移除的功能。
+
+本地审查修订保留完整功能和来源通知，并排除三张第三方聊天/直播截图。IG5 借鉴部分及封装提示词的授权边界仍待核查；上文历史声明不代表本次审查已确认其独立创作或许可兼容。

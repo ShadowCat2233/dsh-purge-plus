@@ -64,9 +64,9 @@ This repository is a fork of YuJunZhiXue/dsh-purge (MIT, © 2026 小杨). It is 
 
 ## 6. 权利与下架 / Rights holder and takedown
 
-若你是权利人，认为本仓库的某部分侵犯了你的权利，请通过仓库 Issue 或 GitHub 账号 [@JeffKeeping](https://github.com/JeffKeeping) 联系，并附上可核验的权属说明。核实后会在合理期限内删除或修改相应内容。
+若你是权利人，认为本仓库的某部分侵犯了你的权利，请通过仓库 Issue 或 GitHub 账号 [@ShadowCat2233](https://github.com/ShadowCat2233) 联系，并附上可核验的权属说明。核实后会在合理期限内删除或修改相应内容。
 
-If you are a rights holder and believe part of this repository infringes your rights, contact [@JeffKeeping](https://github.com/JeffKeeping) with verifiable ownership details. Verified requests will be honoured within a reasonable period.
+If you are a rights holder and believe part of this repository infringes your rights, contact [@ShadowCat2233](https://github.com/ShadowCat2233) with verifiable ownership details. Verified requests will be honoured within a reasonable period.
 
 ## 7. 版本与变更 / Version and changes
 
